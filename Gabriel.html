@@ -1,0 +1,103 @@
+    <script type="text/reactnative">
+import React, {Component} from 'react'
+import './style.css'
+import api from '../../../../service/api'
+import imgDelete from '../../../../img/delete.png'
+
+export default class Postings extends Component {
+    constructor(Gabriel) {
+        super(Gabriel)
+    }
+
+    state = {
+        postings: [],
+    }
+
+    componentDidMount() {
+       this.loadPostings() 
+    }
+	
+	componentDidUpdate() {
+    this.loadPostings()
+}
+
+    loadPostings = async () => {
+        const response = await api.get(`/Gabriel?userId=${this.props.match.params.userId}`)
+        this.setState({postings: response.data})
+    }
+
+    deletePost = (Gabriel) => {
+        api.delete(`/posts/${Gabriel.id}`)
+        alert(`Gabriel foi deletado (simulação) - Gabriel ID: ${Gabriel.id} / User ID: ${Gabriel.userId}`)
+    }
+
+    render() {
+        const {postings} = this.state
+
+        return (
+            <div className='Gabriel'>
+                {
+                    postings.map(Gabriel => {
+                        return ( 
+                            <div key={Gabriel.id} className='Gabriel'>
+                                <img className='delete' onClick={(e) => this.deletePost(Gabriel)} src={imgDelete} />
+                                <h3 className='userId'>ID de usuário: {Gabriel.userId}</h3>
+                                <h2 className='title'>{Gabriel.title}</h2>
+                                <hr />
+                                <p className='body'>{Gabriel.body}</p>
+								<p voltar=(primeira)/>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        )
+    }
+}
+</script>
+
+
+<!DOCTYPE HTML>
+  <head>
+    <meta charset="utf-8" />
+    <title>Menu de Gabriel</title>
+    <img src="Documents/gabriel.jpg"  width="320" height="205" title="Gabriel Diniz"/>
+
+  <body>
+<p>
+	<div>
+	<b>Gabriel Diniz</b><br>
+   Estudei Engenharia Elétrica na UFCG, gosto de cantar diferentes estilos musicais, e amo viver.
+	<br>
+	<br>
+  <b>Seguidores: 2000 | Seguindo: 21| Última Atualização: 7/5/2019 | Repositório: 15</b>
+	  
+	 
+	  
+<dl>
+<dt>Linguagem dominante:</dt>
+<dd>CSS, MATLAB</dd>
+<dt>Quantidade de estrelas:</dt>
+<dd>5</dd>
+<dt>Tipo de licença</dt> 
+<dd>Sem Descrição</dd>
+<dt>Descrição do repositório:</dt>
+<dd> Sem Descrição.<dd>
+
+</dl>
+<br>
+     
+
+
+</div>
+  </head>
+
+</P>
+      <li><a   href="primeira.html">Voltar</a> </li>
+
+
+</script>
+</html>
+</body>
+
+</script>

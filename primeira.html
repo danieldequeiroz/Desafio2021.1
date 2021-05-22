@@ -1,0 +1,212 @@
+
+    <script type="text/reactnative">
+import React, {Component} from 'react'
+import './style.css'
+import api from '../../../../service/api'
+import imgDelete from '../../../../img/delete.png'
+
+export default class Postings extends Component {
+    constructor(primeira) {
+        super(primeira)
+    }
+
+    state = {
+        postings: [],
+    }
+
+    componentDidMount() {
+       this.loadPostings() 
+    }
+	
+	componentDidUpdate() {
+    this.loadPostings()
+}
+
+    loadPostings = async () => {
+        const response = await api.get(`/primeira?userId=${this.primeira.match.params.userId}`)
+        this.setState({postings: response.data})
+    }
+
+    deletePost = (primeira) => {
+        api.delete(`/primeira/${primeira.id}`)
+        alert(`primeira foi deletado (simulação) - primeira ID: ${primeira.id} / User ID: ${primeira.userId}`)
+    }
+
+    render() {
+        const {primeira} = this.state
+
+        return (
+            <div className='primeira'>
+                {
+                    postings.map(primeira => {
+                        return ( 
+                            <div key={primeira.id} className='primeira'>
+                                <img className='delete' onClick={(e) => this.deletePost(primeira)} src={imgDelete} />
+                                <h3 className='userId'>ID de usuário: {primeira.userId}</h3>
+                                <h2 className='title'>{primeira.title}</h2>
+                                <hr />
+                                <p className='body'>{primeira.body}</p>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        )
+    }
+}
+</script>
+
+
+
+
+<!DOCTYPE HTML>
+  <head>
+  
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>SISENEX</title>
+  </head>
+  Por Gentileza, Coloque o nome do Usuário:
+  <br><br>
+  <body>
+    <input id="keyword" type="text" />
+    <button id="search">
+      Buscar
+    </button>
+
+ <ul id="list">
+      <li><a   href="Alvaro.html">Alvaro</a> </li>
+      <li><a   href="Brenan.html">Brenan</a></li>
+      <li><a   href="carlos.html">Carlos</a></li>
+	  <li><a   href="diego.html">Diego</a></li>
+	  <li><a   href="Fabiano.html">Fabiano</a></li>
+	  <li><a   href="Gabriel.html">Gabriel</a></li>
+	  <li><a   href="Higor.html">Higor</a></li>
+	  <li><a   href="janeide.html">Janeide</a></li>
+	  <li><a   href="Leonídea.html">Leonidea</a></li>
+
+
+
+    </ul>
+    <h3>Filtro</h3>
+    <div id="filteredList">
+    </div>
+    <script>
+	
+      function filterByKeyword(filterKeyword) {
+        // Seleciona todos os elementos filhos da lista
+        var list = document.querySelector('#list').childNodes
+        // Cria uma nova lista que será usada depois
+        var newFilteredUl = document.createElement('ul')
+
+        try {
+           // Percorre todos os itens da lista
+          for (var i = 0, length = list.length; i < length; i++) { 
+             // Verifica o tipo do elemento e se ele não está vazio
+            if (list[i].nodeType != 1 && null != list[i].nextSibling) {
+              // Se o valor passado for igual ao valor do texto que está dentro do elemento
+              if (list[i].nextSibling.innerText == filterKeyword) {
+               // Cria um novo item para lista
+                var newLi = document
+                  .createElement('li')
+                // Cria um elemento do tipo TextNode
+                var newLiText = document
+                  .createTextNode(filterKeyword)
+                // Insere o novo texto no novo elemento LI
+                newLi.appendChild(newLiText)
+              }
+            }
+          }
+        // Insere o elemento recém criado a lista criada no começo da funcão
+        newFilteredUl.appendChild(newLi)
+        } catch (e) { 
+          console.error(e)
+        }
+        return newFilteredUl
+      }
+
+      var button = document.querySelector('#search')
+      // Ao clicar no botão de buscar
+      button.onclick = function() {
+        var keyword = document.querySelector('#keyword').value
+
+        var newList = filterByKeyword(keyword)
+        // Insere a nova lista dentro da div
+        document.querySelector('#filteredList').appendChild(newList)
+      }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+</form>
+</body>
+</html>
+
+
+    <script type="text/javascript">
+	
+	function #pesquisa(){
+  var input, filtro, menu, menuItens, links,  pesquisa ;
+  input = document.getElementById("pesquisa");
+  filtro=input.value.toUpperCase();
+  menu=document.getElementById("menu");
+  menuItens = menu.getElementsByTagName("li);
+  for(var i=0;i<menuItens.length;i++){
+  links = menuItens.getElementsBytagName("a")[0];
+  if(links.innerHTML.toUpperCase().indexOf(filtro)>-1){
+    menuItens[i].getElementsByClassName.display="";
+  }else{
+    menuItens[i].getElementsByClassName.display="none";
+  }
+}
+}
+	
+	
+	
+	
+
+</script>
+
+<script>
+<?php
+$servidor = "localhost";
+$usuario = "root";
+$senha= "";
+#dbname= "funildevendas";
+
+//criar a conexao
+$conn = mysqli_connect($servidor, $usuario, $senha, $dbname);
+?>
+</script>
+
+<script>
+<?php
+ //incluir a conexão com banco de dados
+include_once('juncaodecodigos.php');
+
+//Recuperar o valor da pessoa
+$cursos = $_POST('palavra');
+
+//pesquisa no banco de dados
+$cursos="SELECT * FROM cursos WHERE nome LIKE '%$cursos%'";
+$resultado_cursos = mysqli_query($conn, $cursos);
+
+if(mysqli_num_rows($resultado_cursos) <= 0){
+echo "Nenhum curso encontrado...";
+}else
+while($roes = mysqli_fetch_assoc($resultado_cursos)){
+echo "<li>".$rows['nome']."</li>";
+}
+}
+?>
+</script>
+
+

@@ -1,0 +1,103 @@
+    <script type="text/reactnative">
+import React, {Component} from 'react'
+import './style.css'
+import api from '../../../../service/api'
+import imgDelete from '../../../../img/delete.png'
+
+export default class Postings extends Component {
+    constructor(Fabiano) {
+        super(Fabiano)
+    }
+
+    state = {
+        postings: [],
+    }
+
+    componentDidMount() {
+       this.loadPostings() 
+    }
+	
+	componentDidUpdate() {
+    this.loadPostings()
+}
+
+    loadPostings = async () => {
+        const response = await api.get(`/Fabiano?userId=${this.props.match.params.userId}`)
+        this.setState({postings: response.data})
+    }
+
+    deletePost = (Fabiano) => {
+        api.delete(`/posts/${Fabiano.id}`)
+        alert(`Fabiano foi deletado (simulação) - Fabiano ID: ${Fabiano.id} / User ID: ${Fabiano.userId}`)
+    }
+
+    render() {
+        const {Fabiano} = this.state
+
+        return (
+            <div className='Fabiano'>
+                {
+                    postings.map(Fabiano => {
+                        return ( 
+                            <div key={Fabiano.id} className='Fabiano'>
+                                <img className='delete' onClick={(e) => this.deletePost(Fabiano)} src={imgDelete} />
+                                <h3 className='userId'>ID de usuário: {Fabiano.userId}</h3>
+                                <h2 className='title'>{Fabiano.title}</h2>
+                                <hr />
+                                <p className='body'>{Fabiano.body}</p>
+								<p voltar=(primeira)/>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        )
+    }
+}
+</script>
+
+
+<!DOCTYPE HTML>
+  <head>
+    <meta charset="utf-8" />
+    <title>Menu de Fabiano</title>
+    <img src="Documents/fabiano.jpeg"  width="320" height="205" title="fabiano dos anjos"/>
+
+  <body>
+<p>
+	<div>
+	<b>Fabiano dos Anjos</b><br>
+   Sou formadoem Estatistica pela UFPI, e pos em Informatica na UFRN. Amo Cantar nas horas vagas. Sou professor no IFRN de Informática.
+	<br>
+	<br>
+  <b>Seguidores: 520 | Seguindo: 65| Última Atualização: 5/11/2020 | Repositório: 30</b>
+	  
+	 
+	  
+<dl>
+<dt>Linguagem dominante:</dt>
+<dd>React Native, Angular</dd>
+<dt>Quantidade de estrelas:</dt>
+<dd>5</dd>
+<dt>Tipo de licença</dt> 
+<dd>Sem Descrição</dd>
+<dt>Descrição do repositório:</dt>
+<dd> Sem Descrição.<dd>
+
+</dl>
+<br>
+     
+
+
+</div>
+  </head>
+
+</P>
+      <li><a   href="primeira.html">Voltar</a> </li>
+
+
+</script>
+</html>
+</body>
+
+</script>

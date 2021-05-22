@@ -1,0 +1,101 @@
+    <script type="text/reactnative">
+import React, {Component} from 'react'
+import './style.css'
+import api from '../../../../service/api'
+import imgDelete from '../../../../img/delete.png'
+
+export default class Postings extends Component {
+    constructor(Higor) {
+        super(Higor)
+    }
+
+    state = {
+        postings: [],
+    }
+
+    componentDidMount() {
+       this.loadPostings() 
+    }
+	
+	componentDidUpdate() {
+    this.loadPostings()
+}
+
+    loadPostings = async () => {
+        const response = await api.get(`/Higor?userId=${this.Higor.match.params.userId}`)
+        this.setState({postings: response.data})
+    }
+
+    deletePost = (Higor) => {
+        api.delete(`/Higor/${Higor.id}`)
+        alert(`Higor foi deletado (simulação) - Higor ID: ${Higor.id} / User ID: ${Higor.userId}`)
+    }
+
+    render() {
+        const {postings} = this.state
+
+        return (
+            <div className='Higor'>
+                {
+                    postings.map(Higor => {
+                        return ( 
+                            <div key={Higor.id} className='Higor'>
+                                <img className='delete' onClick={(e) => this.deletePost(Higor)} src={imgDelete} />
+                                <h3 className='userId'>ID de usuário: {Higor.userId}</h3>
+                                <h2 className='title'>{Higor.title}</h2>
+                                <hr />
+                                <p className='body'>{Higor.body}</p>
+								<p voltar=(primeira)/>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        )
+    }
+}
+</script>
+<!DOCTYPE HTML>
+  <head>
+    <meta charset="utf-8" />
+    <title>Menu de Higor</title>
+    <img src="Documents/Higor.jpeg"  width="320" height="205" title="Higor Borges"/>
+
+  <body>
+<p>
+	<div>
+	<b>Higor Borges</b><br>
+     Já fui jogador de Futebol profissional pelo Flamengo, fiz técnico em Informática, e hoje trabalho na Unix Informática.    
+   <br>
+	<br>
+  <b>Seguidores: 54 | Seguindo: 3| Última Atualização: 4/12/2020 | Repositório: 8</b>
+	  
+	 
+	  
+<dl>
+<dt>Linguagem dominante:</dt>
+<dd>C, PHP</dd>
+<dt>Quantidade de estrelas:</dt>
+<dd>2</dd>
+<dt>Tipo de licença</dt> 
+<dd>Sem Descrição</dd>
+<dt>Descrição do repositório:</dt>
+<dd> Sem Descrição.<dd>
+
+</dl>
+<br>
+     
+
+
+</div>
+  </head>
+
+</P>
+      <li><a   href="primeira.html">Voltar</a> </li>
+
+
+</script>
+</html>
+</body>
+
+</script>

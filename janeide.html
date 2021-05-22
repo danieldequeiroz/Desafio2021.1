@@ -1,0 +1,101 @@
+    <script type="text/reactnative">
+import React, {Component} from 'react'
+import './style.css'
+import api from '../../../../service/api'
+import imgDelete from '../../../../img/delete.png'
+
+export default class Postings extends Component {
+    constructor(Janeide) {
+        super(Janeide)
+    }
+
+    state = {
+        postings: [],
+    }
+
+    componentDidMount() {
+       this.loadPostings() 
+    }
+	
+	componentDidUpdate() {
+    this.loadPostings()
+}
+
+    loadPostings = async () => {
+        const response = await api.get(`/Janeide?userId=${this.props.match.params.userId}`)
+        this.setState({postings: response.data})
+    }
+
+    deletePost = (Janeide) => {
+        api.delete(`/Janeide/${Janeide.id}`)
+        alert(`Janeide foi deletado (simulação) - Janeide ID: ${Janeide.id} / User ID: ${Janeide.userId}`)
+    }
+
+    render() {
+        const {postings} = this.state
+
+        return (
+            <div className='Janeide'>
+                {
+                    postings.map(Janeide => {
+                        return ( 
+                            <div key={Janeide.id} className='Janeide'>
+                                <img className='delete' onClick={(e) => this.deletePost(Janeide)} src={imgDelete} />
+                                <h3 className='userId'>ID de usuário: {Janeide.userId}</h3>
+                                <h2 className='title'>{Janeide.title}</h2>
+                                <hr />
+                                <p className='body'>{Janeide.body}</p>
+								<p voltar=(primeira)/>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        )
+    }
+}
+</script>
+<!DOCTYPE HTML>
+  <head>
+    <meta charset="utf-8" />
+    <title>Menu de Janeide</title>
+    <img src="Documents/Janeide.jpeg"  width="320" height="205" title="Janeide Costa"/>
+
+  <body>
+<p>
+	<div>
+	<b>Janeide Costa</b><br>
+     Já fui Deputada Estadual, pelo meu Estado Maranhão. Amo tecnologia, sou formada em gestão de empresas, com pos em inteligencia artificial, e trabalhei na SECITEC-MA.
+   <br>
+	<br>
+  <b>Seguidores: 89 | Seguindo: 65| Última Atualização: 7/3/2021 | Repositório: 7</b>
+	  
+	 
+	  
+<dl>
+<dt>Linguagem dominante:</dt>
+<dd>Java, JavaScript, CSS</dd>
+<dt>Quantidade de estrelas:</dt>
+<dd>1</dd>
+<dt>Tipo de licença</dt> 
+<dd>Sem Descrição</dd>
+<dt>Descrição do repositório:</dt>
+<dd> Sem Descrição.<dd>
+
+</dl>
+<br>
+     
+
+
+</div>
+  </head>
+
+</P>
+      <li><a   href="primeira.html">Voltar</a> </li>
+
+
+</script>
+</html>
+</body>
+
+</script>

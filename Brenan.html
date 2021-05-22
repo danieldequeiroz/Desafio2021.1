@@ -1,0 +1,103 @@
+    <script type="text/reactnative">
+import React, {Component} from 'react'
+import './style.css'
+import api from '../../../../service/api'
+import imgDelete from '../../../../img/delete.png'
+
+export default class Postings extends Component {
+    constructor(Brenan) {
+        super(Brenan)
+    }
+
+    state = {
+        postings: [],
+    }
+
+    componentDidMount() {
+       this.loadPostings() 
+    }
+	
+	componentDidUpdate() {
+    this.loadPostings()
+}
+
+    loadPostings = async () => {
+        const response = await api.get(`/Brenan?userId=${this.Brenan.match.params.userId}`)
+        this.setState({postings: response.data})
+    }
+
+    deletePost = (Brenan) => {
+        api.delete(`/Brenan/${Brenan.id}`)
+        alert(`Brenan foi deletado (simulação) - Brenan ID: ${Brenan.id} / User ID: ${Brenan.userId}`)
+    }
+
+    render() {
+        const {Brenan} = this.state
+
+        return (
+            <div className='Brenan'>
+                {
+                    postings.map(Brenan => {
+                        return ( 
+                            <div key={Brenan.id} className='Brenan'>
+                                <img className='delete' onClick={(e) => this.deletePost(Brenan)} src={imgDelete} />
+                                <h3 className='userId'>ID de usuário: {Brenan.userId}</h3>
+                                <h2 className='title'>{Brenan.title}</h2>
+                                <hr />
+                                <p className='body'>{Brenan.body}</p>
+								<p voltar=(primeira)/>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        )
+    }
+}
+</script>
+
+
+<!DOCTYPE HTML>
+  <head>
+    <meta charset="utf-8" />
+    <title>Menu de Brenan</title>
+    <img src="Documents/brenan.jpeg"  width="320" height="205" title="Brenan Silva"/>
+
+  <body>
+<p>
+	<div>
+	<b>Brenan Silva</b><br>
+    Gosto de viajar, estudar, e trabalhar em equipe. Trabalho na Receita Federal.
+	<br>
+	<br>
+  <b>Seguidores: 1000 | Seguindo: 34566| Última Atualização: 24/01/2021 | Repositório: 500</b>
+	  
+	 
+	  
+<dl>
+<dt>Linguagem dominante:</dt>
+<dd>JavaScript</dd>
+<dt>Quantidade de estrelas:</dt>
+<dd>5</dd>
+<dt>Tipo de licença</dt> 
+<dd>Sem Descrição</dd>
+<dt>Descrição do repositório:</dt>
+<dd> Sem Descrição.<dd>
+
+</dl>
+<br>
+     
+
+
+</div>
+  </head>
+
+</P>
+      <li><a   href="primeira.html">Voltar</a> </li>
+
+
+</script>
+</html>
+</body>
+
+</script>

@@ -1,0 +1,104 @@
+    <script type="text/reactnative">
+import React, {Component} from 'react'
+import './style.css'
+import api from '../../../../service/api'
+import imgDelete from '../../../../img/delete.png'
+
+export default class Postings extends Component {
+    constructor(Alvaro) {
+        super(Alvaro)
+    }
+
+    state = {
+        postings: [],
+    }
+
+    componentDidMount() {
+       this.loadPostings() 
+    }
+	
+	componentDidUpdate() {
+    this.loadPostings()
+}
+
+    loadPostings = async () => {
+        const response = await api.get(`/Alvaro?userId=${this.buscar.match.params.userId}`)
+        this.setState({postings: response.data})
+    }
+
+    deletePost = (Alvaro) => {
+        api.delete(`/Alvaro/${Alvaro.id}`)
+        alert(`Alvaro foi deletado (simulação) - Alvaro ID: ${Alvaro.id} / User ID: ${Alvaro.userId}`)
+    }
+
+    render() {
+        const {Alvaro} = this.state
+
+        return (
+            <div className='Alvaro'>
+                {
+                    postings.map(Alvaro => {
+                        return ( 
+                            <div key={Alvaro.id} className='Alvaro'>
+                                <img className='delete' onClick={(e) => this.deletePost(Alvaro)} src={imgDelete} />
+                                <h3 className='userId'>ID de usuário: {Alvaro.userId}</h3>
+                                <h2 className='title'>{Alvaro.title}</h2>
+                                <hr />
+                                <p className='body'>{Alvaro.body}</p>
+								<p voltar=(primeira)/>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        )
+    }
+}
+</script>
+
+
+
+<!DOCTYPE HTML>
+  <head>
+    <meta charset="utf-8" />
+    <title>Menu de Alvaro</title>
+    <img src="Documents/alvaro.jpg"  width="320" height="205" title="Alvaro Dias"/>
+
+  <body>
+<p>
+	<div>
+	<b>Alvaro Dias</b><br>
+    Sou um aluno exemplar, gosto de estudar, programar, e ser feliz.
+	<br>
+	<br>
+  <b>Seguidores: 0 | Seguindo: 2| Última Atualização: 01/01/2000 | Repositório: 2</b>
+	  
+	 
+	  
+<dl>
+<dt>Linguagem dominante:</dt>
+<dd>C</dd>
+<dt>Quantidade de estrelas:</dt>
+<dd>1</dd>
+<dt>Tipo de licença</dt> 
+<dd>Sem Descrição</dd>
+<dt>Descrição do repositório:</dt>
+<dd> Sem Descrição.<dd>
+
+</dl>
+<br>
+     
+
+
+</div>
+  </head>
+
+</P>
+      <li><a   href="primeira.html">Voltar</a> </li>
+
+
+</script>
+</html>
+</body>
+
+</script>

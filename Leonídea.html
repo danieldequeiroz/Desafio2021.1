@@ -1,0 +1,103 @@
+    <script type="text/reactnative">
+import React, {Component} from 'react'
+import './style.css'
+import api from '../../../../service/api'
+import imgDelete from '../../../../img/delete.png'
+
+export default class Postings extends Component {
+    constructor(Leonídea) {
+        super(Leonídea)
+    }
+
+    state = {
+        postings: [],
+    }
+
+    componentDidMount() {
+       this.loadPostings() 
+    }
+	
+	componentDidUpdate() {
+    this.loadPostings()
+}
+
+    loadPostings = async () => {
+        const response = await api.get(`/Leonídea?userId=${this.Leonídea.match.params.userId}`)
+        this.setState({postings: response.data})
+    }
+
+    deletePost = (Leonídea) => {
+        api.delete(`/Leonídea/${Leonídea.id}`)
+        alert(`Leonídea foi deletado (simulação) - Leonídea ID: ${Leonídea.id} / User ID: ${Leonídea.userId}`)
+    }
+
+    render() {
+        const {Leonídea} = this.state
+
+        return (
+            <div className='Leonídea'>
+                {
+                    postings.map(Leonídea => {
+                        return ( 
+                            <div key={Leonídea.id} className='Leonídea'>
+                                <img className='delete' onClick={(e) => this.deletePost(Leonídea)} src={imgDelete} />
+                                <h3 className='userId'>ID de usuário: {Leonídea.userId}</h3>
+                                <h2 className='title'>{Leonídea.title}</h2>
+                                <hr />
+                                <p className='body'>{Leonídea.body}</p>
+								<p voltar=(primeira)/>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        )
+    }
+}
+</script>
+
+
+<!DOCTYPE HTML>
+  <head>
+    <meta charset="utf-8" />
+    <title>Menu de Leonídea</title>
+    <img src="Documents/Leonidea.jpeg"  width="320" height="205" title="Leonidea Amaral"/>
+
+  <body>
+<p>
+	<div>
+	<b>Leonidea Amaral</b><br>
+     Trabalho com Inteligencia Artificial, em Curitiba, sou formada em Engenharia da computação na UFPR. Gosto de viajar, e dos meus filhos.
+   <br>
+	<br>
+  <b>Seguidores: 78 | Seguindo: 690| Última Atualização: 6/2/2021 | Repositório: 65</b>
+	  
+	 
+	  
+<dl>
+<dt>Linguagem dominante:</dt>
+<dd>HTML, CSS, Java, C++</dd>
+<dt>Quantidade de estrelas:</dt>
+<dd>5</dd>
+<dt>Tipo de licença</dt> 
+<dd>Sem Descrição</dd>
+<dt>Descrição do repositório:</dt>
+<dd> Sem Descrição.<dd>
+
+</dl>
+<br>
+     
+
+
+</div>
+  </head>
+
+</P>
+      <li><a   href="primeira.html">Voltar</a> </li>
+
+
+</script>
+</html>
+</body>
+
+</script>

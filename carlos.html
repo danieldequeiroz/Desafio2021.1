@@ -1,0 +1,103 @@
+    <script type="text/reactnative">
+import React, {Component} from 'react'
+import './style.css'
+import api from '../../../../service/api'
+import imgDelete from '../../../../img/delete.png'
+
+export default class Postings extends Component {
+    constructor(Carlos) {
+        super(Carlos)
+    }
+
+    state = {
+        postings: [],
+    }
+
+    componentDidMount() {
+       this.loadPostings() 
+    }
+	
+	componentDidUpdate() {
+    this.loadPostings()
+}
+
+    loadPostings = async () => {
+        const response = await api.get(`/Carlos?userId=${this.carlos.match.params.userId}`)
+        this.setState({postings: response.data})
+    }
+
+    deletePost = (Carlos) => {
+        api.delete(`/posts/${Carlos.id}`)
+        alert(`Carlos foi deletado (simulação) - Carlos ID: ${Carlos.id} / User ID: ${Carlos.userId}`)
+    }
+
+    render() {
+        const {postings} = this.state
+
+        return (
+            <div className='Carlos'>
+                {
+                    postings.map(Carlos => {
+                        return ( 
+                            <div key={Carlos.id} className='Carlos'>
+                                <img className='delete' onClick={(e) => this.deletePost(Carlos)} src={imgDelete} />
+                                <h3 className='userId'>ID de usuário: {Carlos.userId}</h3>
+                                <h2 className='title'>{Carlos.title}</h2>
+                                <hr />
+                                <p className='body'>{Carlos.body}</p>
+								<p voltar=(primeira)/>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        )
+    }
+}
+</script>
+
+
+<!DOCTYPE HTML>
+  <head>
+    <meta charset="utf-8" />
+    <title>Menu de Carlos</title>
+    <img src="Documents/carlos.jpg"  width="320" height="205" title="carlos gouveia"/>
+
+  <body>
+<p>
+	<div>
+	<b>Carlos Gouveia</b><br>
+    Amo sorvete, comer pizza, e chocolate. Trabalho no Banco Santander.
+	<br>
+	<br>
+  <b>Seguidores: 520 | Seguindo: 65| Última Atualização: 5/11/2020 | Repositório: 30</b>
+	  
+	 
+	  
+<dl>
+<dt>Linguagem dominante:</dt>
+<dd>HTML</dd>
+<dt>Quantidade de estrelas:</dt>
+<dd>5</dd>
+<dt>Tipo de licença</dt> 
+<dd>Sem Descrição</dd>
+<dt>Descrição do repositório:</dt>
+<dd> Sem Descrição.<dd>
+
+</dl>
+<br>
+     
+
+
+</div>
+  </head>
+
+</P>
+      <li><a   href="primeira.html">Voltar</a> </li>
+
+
+</script>
+</html>
+</body>
+
+</script>
